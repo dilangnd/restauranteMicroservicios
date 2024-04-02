@@ -1,0 +1,47 @@
+version: '3'
+services:
+  ### todos van a ser en posgres pero pa no matarme la vida van usuario root y pass toor como en distros linux
+  ### base de datos posgres del inventario
+  db-inventory:
+    container_name: db-inventario
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: db_inventario
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+    ports:
+      - 5431:5431
+    expose:
+      - 5431
+    command: -p 5431
+
+  ### base de datos posgres de las ordenes/recetas
+  db-orders:
+    container_name: db-ordenes
+    image: mysql:8.0.33
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_ordenes
+      MYSQL_USER: root
+      MYSQL_PASSWORD: toor
+      MYSQL_ROOT_PASSWORD: toor
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+
+  ### base de datos posgres de ingredientes
+  db-products:
+    container_name: db-products
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ms_products
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    command: -p 5432
